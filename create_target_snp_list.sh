@@ -1,0 +1,2 @@
+grep -F -f am1/am1_emmax.ps.qqman.emmax_200kb.clumped.snps_list ../genotype/320PHY_2013WS_SEC.geno01.mind01.maf005.cleaned.bim | sort -k2 | awk '{print "chr" sprintf("%02d",$1) "\t" $4 "\t" $2 "\t" $5 "\t" $6;}' > am1/am1_emmax.ps.qqman.emmax_200kb.clumped.snps.target_list && bgzip -c am1/am1_emmax.ps.qqman.emmax_200kb.clumped.snps.target_list > am1/am1_emmax.ps.qqman.emmax_200kb.clumped.snps.target_list.gz && tabix -s1 -b2 -e2 am1/am1_emmax.ps.qqman.emmax_200kb.clumped.snps.target_list.gz
+
