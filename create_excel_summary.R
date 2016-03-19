@@ -5,7 +5,7 @@
 #
 
 
-# Sys.getenv("R_ZIPCMD", "zip") 
+# Sys.getenv("R_ZIPCMD", "zip")
 Sys.setenv(R_ZIPCMD="/usr/bin/zip")   # without this openxlsx will cry
 
 
@@ -58,6 +58,10 @@ addWorksheet(wb, sheetName="Annotation of SNPs")
 addWorksheet(wb, sheetName="annotation of genes")
 #cat("DONE.\n")
 
+# create the tag SNPs
+addWorksheet(wb, sheetName="tag SNPs")
+
+
 ### 3. Write the data into the worksheets
 # sheet 1
 cat("Compiling SNPs and linked SNPs...")
@@ -92,6 +96,9 @@ writeData(wb=wb, sheet="annotation of genes", x=data, colNames=TRUE, rowNames=FA
 setColWidths(wb, sheet="annotation of genes", cols=1:(dim(data)[2]), widths="auto")
 cat("DONE.\n")
 
+
+# sheet 5
+# save the TAG SNPs here
 
 # Save the workbook
 cat("Saving the summary...")
