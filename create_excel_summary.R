@@ -99,6 +99,28 @@ cat("DONE.\n")
 
 # sheet 5
 # save the TAG SNPs here
+cat("Compiling tag SNPs...")
+tag_snps <- data.frame(tag_snp=character(0), captured_alleles=character(0))
+tag_files <- list.files(path=path, pattern="*.TAGS$", include.dirs=T)
+for (i in 1:length(tag_files)) {
+   # Get the contents of the entire TAGS file into a vector
+   all_data <- readLines(paste0(path,"/",tag_files[i]))
+
+   # No of alleles is in line 1, second word
+   alleles <- as.numeric(strsplit(all_data[1]," ")[[1]][2]) # numbers are hardcoded
+   snps <- as.numeric(strsplit(all_data[3]," ")[[1]][2]) # numbers are also hardcoded
+   for (j in 1:snps) {
+      #cat(paste0(all_data[alleles+7],"\n"))
+      res <- strsplit(all_data[alleles+7+(j-1)], split="\t")
+      tag_snps <- rbind(tag_snps,
+                        data.frame(tag_snp=res[[1]][1], captured_alleles=res[[1]][2],
+                                   stringsAsFactors=F))
+   }
+}
+writeData(wb=wb, sheet="tag SNPs", x=tag_snps, colNames=TRUE, rowNames=FALSE)
+setColWidths(wb, sheet="tag SNPs", cols=1:(dim(tag_snps)[2]), widths="auto")
+cat("DONE.\n")
+
 
 # Save the workbook
 cat("Saving the summary...")
