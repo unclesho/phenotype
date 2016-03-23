@@ -158,10 +158,6 @@ for (i in 1:length(tag_files)) {
    for(k in 1:snps) {
       xbot <-l_edge+(k-1)*BOX_SPACE
       ybot <-offset+tag_snps*BOX_SPACE
-      # rect(xbot, ybot, xbot+(BOX_SPACE-BOX_LANE), ybot+(BOX_SPACE-BOX_LANE),
-      #      col=ifelse(snp_lookup[[i]][k,1]==res[[1]][1],"red",
-      #                 ifelse(isCapturedAllele(snp_lookup[[i]][k,1], captured_alleles),
-      #                        "green","white"))
       text(xbot+(BOX_SPACE-BOX_LANE)/2, ybot+3*(BOX_LANE+BOX_SPACE),
            labels=paste0(snp_lookup[[i]][k,1]," (",
                          snp_lookup[[i]][k,4],"/",snp_lookup[[i]][k,3], ")"),
@@ -172,8 +168,6 @@ for (i in 1:length(tag_files)) {
 
    res <- dev.off() # close the PDF device
 }
-#writeData(wb=wb, sheet="tag SNPs", x=tag_snps, colNames=TRUE, rowNames=FALSE)
-#setColWidths(wb, sheet="tag SNPs", cols=1:(dim(tag_snps)[2]), widths="auto")
 cat("DONE.\n")
 
 
