@@ -55,7 +55,7 @@ suppressMessages(library(svglite))
 args<-base::commandArgs(trailingOnly=T)
 
 if (length(args) != 2) {
-   cat("Usage: Rscript create_tagSNP_lanes.R <trait> <genotype_prefix>\n")
+   cat("Usage: Rscript create_haploview_replacement_header.R <trait> <genotype_prefix>\n")
    quit(save="no", status=1, runLast=T) # non-zero status means an error has occurred.
 } else if (!dir.exists(args[1])) {
    cat(paste0("ERROR: '",args[1],"' does not exist.\n"))
@@ -336,7 +336,8 @@ for (i in 1:length(snp_lookup)) {
    snps$xpos <- seq(from=snps[1,2], to=snps[nrow(snps),2], length.out=nrow(snps))
    snps$logp <- -log10(snps$P)
    snps$label <- paste0(snps$V1," (",snps$V6,"/",snps$V5,")")
-   snps$l_width <- ceiling(1+(snps$BETA-min(snps$BETA))*(9/diff(range(snps$BETA))))
+   snps$absBETA <- abs(snps$BETA)
+   snps$l_width <- ceiling(1+(snps$absBETA-min(snps$absBETA))*(9/diff(range(snps$absBETA))))
    plot(snps[, c("xpos","logp")],
         ylim=c(0,ceiling(max(snps$logp))),
         xlim=c(min(snps$xpos),max(snps$xpos)),

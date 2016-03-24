@@ -64,6 +64,7 @@ VERSION=0.5.0
 #  - Corrected the haploview call to output only GABRIEL blocks
 #  - Corrected the create_excel_summary.R file to also include the tag SNPs sheet.
 #  - Created the create_tagSNP_lanes.R script to output the tagSNP combinations
+#  - Created a haploview replacement header
 #
 
 
@@ -222,6 +223,9 @@ if [ -f "$1/$1_emmax.ps.qqman.emmax_200kb.clumped" ]; then
 
    # 9. Create tag SNP diagram
    Rscript create_tagSNP_lanes.R $1 $2
+
+   # 10. Create haploview replacement header
+   Rscript create_haploview_replacement_header $1 $2
 fi
 
 # 6. Create manhattan and qq plot"
